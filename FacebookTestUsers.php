@@ -42,11 +42,15 @@ class FacebookTestUsers {
     protected $tu;
     protected $_cache;
 
+    /**
+     * @param $fb instance of Facebook SDK
+     * @param $appId
+     */
     public function __construct($fb, $appId)
     {
         $this->fb = $fb;
         $this->appId = $appId;
-        $this->tu = '/' . $appId . '/accounts/test-users';
+        $this->tu = '/' . $this->appId . '/accounts/test-users';
     }
 
     /**
@@ -116,13 +120,7 @@ class FacebookTestUsers {
             echo "User " . $u1['id'] . " befriended " . $u2['id'] . PHP_EOL;
             return true;
         } catch(FacebookApiException $e) {
-            if($e->getMessage() ==
-                '(#522) You are already friends with this user') {
-                return false;
-            }
-            else {
-                throw $e;
-            }
+            echo $e->getMessage() . PHP_EOL;
         }
     }
 
