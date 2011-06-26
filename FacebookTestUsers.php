@@ -157,4 +157,16 @@ class FacebookTestUsers {
             printf("\t - ID: %s" . PHP_EOL, $f['id']);
         }
     }
+
+    /**
+     * Since test user login URLs expire, this method fetches a fresh one
+     */
+    public function getLoginUrl($fbUserId) {
+        foreach($this->all() as $i) {
+            if($i['id'] === $fbUserId) {
+                return $i['login_url'];
+            }
+        }
+        return false;
+    }
 }
